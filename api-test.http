@@ -44,3 +44,62 @@ Content-Type: application/json
 ### 8. GET all movies again (to verify new movies were added)
 GET http://localhost:3000/movies
 
+### 9. GET movies with query parameter - filter by year
+GET http://localhost:3000/movies?year=2010
+
+### 10. GET movies with query parameter - filter by director
+GET http://localhost:3000/movies?director=Christopher Nolan
+
+### 11. GET movies with query parameter - filter by title
+GET http://localhost:3000/movies?title=Matrix
+
+### 12. GET movies with multiple query parameters
+GET http://localhost:3000/movies?year=2010&director=Christopher Nolan
+
+### 13. PUT - Update an existing movie
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "title": "Inception (Updated)",
+  "year": 2010
+}
+
+### 14. PUT - Update movie with all fields
+PUT http://localhost:3000/movies/2
+Content-Type: application/json
+
+{
+  "title": "The Matrix Reloaded",
+  "director": "The Wachowskis",
+  "year": 2003
+}
+
+### 15. PUT - Test validation (invalid year)
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "year": 1800
+}
+
+### 16. PUT - Test 404 (non-existent movie)
+PUT http://localhost:3000/movies/999
+Content-Type: application/json
+
+{
+  "title": "Non-existent Movie"
+}
+
+### 17. DELETE - Delete a movie
+DELETE http://localhost:3000/movies/3
+
+### 18. DELETE - Test 404 (non-existent movie)
+DELETE http://localhost:3000/movies/999
+
+### 19. GET all movies after deletion
+GET http://localhost:3000/movies
+
+### 20. Test catch-all route (undefined route)
+GET http://localhost:3000/undefined-route
+

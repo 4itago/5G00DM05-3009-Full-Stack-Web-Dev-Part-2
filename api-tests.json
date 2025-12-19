@@ -1,0 +1,206 @@
+{
+  "version": "1.0",
+  "tests": [
+    {
+      "name": "GET all movies",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies"
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "type": "array"
+        }
+      }
+    },
+    {
+      "name": "GET movie by ID (existing)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies/1"
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "id": 1,
+          "title": "Inception"
+        }
+      }
+    },
+    {
+      "name": "GET movie by ID (non-existent)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies/999"
+      },
+      "expect": {
+        "status": 404
+      }
+    },
+    {
+      "name": "POST create new movie",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:3000/movies",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Test Movie",
+          "director": "Test Director",
+          "year": 2020
+        }
+      },
+      "expect": {
+        "status": 201,
+        "body": {
+          "title": "Test Movie",
+          "director": "Test Director",
+          "year": 2020
+        }
+      }
+    },
+    {
+      "name": "POST validation error (missing fields)",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:3000/movies",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Incomplete Movie"
+        }
+      },
+      "expect": {
+        "status": 400
+      }
+    },
+    {
+      "name": "POST validation error (invalid year)",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:3000/movies",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Old Movie",
+          "director": "Old Director",
+          "year": 1800
+        }
+      },
+      "expect": {
+        "status": 400
+      }
+    },
+    {
+      "name": "PUT update movie",
+      "request": {
+        "method": "PUT",
+        "url": "http://localhost:3000/movies/1",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Updated Title",
+          "year": 2011
+        }
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "id": 1,
+          "title": "Updated Title"
+        }
+      }
+    },
+    {
+      "name": "PUT update non-existent movie",
+      "request": {
+        "method": "PUT",
+        "url": "http://localhost:3000/movies/999",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Non-existent"
+        }
+      },
+      "expect": {
+        "status": 404
+      }
+    },
+    {
+      "name": "DELETE movie",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:3000/movies/2"
+      },
+      "expect": {
+        "status": 204
+      }
+    },
+    {
+      "name": "DELETE non-existent movie",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:3000/movies/999"
+      },
+      "expect": {
+        "status": 404
+      }
+    },
+    {
+      "name": "GET movies filtered by year",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies?year=2010"
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "type": "array"
+        }
+      }
+    },
+    {
+      "name": "GET movies filtered by director",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies?director=Christopher Nolan"
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "type": "array"
+        }
+      }
+    },
+    {
+      "name": "GET movies with multiple filters",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies?year=2010&director=Christopher Nolan"
+      },
+      "expect": {
+        "status": 200,
+        "body": {
+          "type": "array"
+        }
+      }
+    },
+    {
+      "name": "Catch-all route (404)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/undefined-route"
+      },
+      "expect": {
+        "status": 404
+      }
+    }
+  ]
+}
+

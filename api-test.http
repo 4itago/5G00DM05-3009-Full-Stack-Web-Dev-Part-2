@@ -1,0 +1,46 @@
+### REST Client Test File for Movie Collection API
+### Make sure the server is running on http://localhost:3000
+
+### 1. GET all movies (JSON)
+GET http://localhost:3000/movies
+
+### 2. GET default route (HTML page)
+GET http://localhost:3000/
+
+### 3. GET movie by ID (existing movie)
+GET http://localhost:3000/movies/1
+
+### 4. GET movie by ID (non-existent movie)
+GET http://localhost:3000/movies/999
+
+### 5. POST - Add a new movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Interstellar",
+  "director": "Christopher Nolan",
+  "year": 2014
+}
+
+### 6. POST - Add another movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "The Dark Knight",
+  "director": "Christopher Nolan",
+  "year": 2008
+}
+
+### 7. POST - Test validation (missing fields)
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Incomplete Movie"
+}
+
+### 8. GET all movies again (to verify new movies were added)
+GET http://localhost:3000/movies
+

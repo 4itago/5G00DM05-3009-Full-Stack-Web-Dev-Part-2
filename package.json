@@ -1,0 +1,24 @@
+{
+  "name": "5g00dm05-3009-full-stack-web-dev-part-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4itago/5G00DM05-3009-Full-Stack-Web-Dev-Part-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/4itago/5G00DM05-3009-Full-Stack-Web-Dev-Part-2/issues"
+  },
+  "homepage": "https://github.com/4itago/5G00DM05-3009-Full-Stack-Web-Dev-Part-2#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

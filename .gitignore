@@ -137,3 +137,12 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+*.docx
+# Microsoft Office temporary files
+~$*.doc*
+~WRL*.tmp
+*.tmp
+
+*.md
+!README.md

@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server-mongodb.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/4itago/5G00DM05-3009-Full-Stack-Web-Dev-Part-2#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.6.1",
     "express": "^5.2.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^6.21.0",
     "morgan": "^1.10.1"
   }

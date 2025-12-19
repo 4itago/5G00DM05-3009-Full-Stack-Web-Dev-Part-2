@@ -1,0 +1,128 @@
+### REST Client Test File for Movie Collection API with Authentication
+### Make sure the server is running on http://localhost:3000
+
+### Variables (set these after signup/login)
+@baseUrl = http://localhost:3000
+@token = your-token-here
+
+### 1. Sign up a new user
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "username": "testuser2",
+  "password": "password1234",
+  "name": "Test User 2",
+  "email": "test2@example.com"
+}
+
+### 2. Login (get token)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser2",
+  "password": "password1234"
+}
+
+### 3. GET all movies (public - no auth required)
+GET {{baseUrl}}/movies
+
+### 4. GET movie by ID (public - no auth required)
+GET {{baseUrl}}/movies/1
+
+### 5. POST - Add a new movie (requires authentication)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0ZXN0dXNlcjIiLCJpYXQiOjE3NjYxNDI5ODMsImV4cCI6MTc2NjE0NjU4M30.dicaTfoJo7etpRQqkCV5Wmq915F3qZtHXPoCcrgbZIU
+
+{
+  "title": "Interstellar",
+  "director": "Christopher Nolan",
+  "year": 2014
+}
+
+### 6. PUT - Update a movie (requires authentication)
+PUT {{baseUrl}}/movies/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0ZXN0dXNlcjIiLCJpYXQiOjE3NjYxNDI5ODMsImV4cCI6MTc2NjE0NjU4M30.dicaTfoJo7etpRQqkCV5Wmq915F3qZtHXPoCcrgbZIU
+
+{
+  "title": "Inception (Updated)",
+  "year": 2010
+}
+
+### 7. DELETE - Delete a movie (requires authentication)
+DELETE {{baseUrl}}/movies/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0ZXN0dXNlcjIiLCJpYXQiOjE3NjYxNDI5ODMsImV4cCI6MTc2NjE0NjU4M30.dicaTfoJo7etpRQqkCV5Wmq915F3qZtHXPoCcrgbZIU
+
+### 8. Test without token (should fail)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Unauthorized Movie",
+  "director": "Unknown",
+  "year": 2024
+}
+
+### 9. Test with invalid token (should fail)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: Bearer invalid-token-here
+
+{
+  "title": "Invalid Token Movie",
+  "director": "Unknown",
+  "year": 2024
+}
+
+### 10. Test validation errors - missing fields (requires token)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTc2NjE0MjQ4NiwiZXhwIjoxNzY2MTQ2MDg2fQ.L0SyEJm5r7ZuUvxh7T4FcMxvkE_kxNPPCZDZpwToaUU
+
+{
+  "title": "Incomplete Movie"
+}
+
+### 11. Test validation errors - empty title (requires token)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "",
+  "director": "Test",
+  "year": 2020
+}
+
+### 12. Test validation errors - invalid year (requires token)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Old Movie",
+  "director": "Test Director",
+  "year": 1800
+}
+
+### 13. Test signup with existing username (should fail)
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+### 14. Test login with wrong password (should fail)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "wrongpassword"
+}
+
